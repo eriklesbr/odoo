@@ -1,0 +1,138 @@
+<odoo>
+  <data>
+
+    <!-- explicit list view definition -->
+    <record model="ir.ui.view" id="clientes_tree_view">
+      <field name="name">clientes.tree</field>
+      <field name="model">res.partner</field>
+      <field name="inherit_id" ref="base.view_partner_tree"/>
+      <field name="arch" type="xml">
+        <xpath expr="//tree" position="replace">
+          <tree>
+            <field name="name"/>
+            <field name="cpf"/>
+            <field name="rg"/>
+            <field name="city"/>
+          </tree>
+        </xpath>
+      </field>
+    </record>
+
+    <!-- Formulario -->
+    <record model="ir.ui.view" id="partner_form_view">
+      <field name="name">clientes.form</field>
+      <field name="model">res.partner</field>
+      <field name="inherit_id" ref="base.view_partner_form"/>
+      <field name="arch" type="xml">
+        <xpath expr="//sheet" position="replace">
+          <sheet>
+            <notebook>
+              <page string="Informações Cadastrais">
+                <group col="12" colspan="12">
+                  <field name="tipo"/>
+                  <label for="" name="cpf">
+                    <b attrs="{'invisible': [('tipo', '!=', '1')]}">CPF:</b>
+                    <b attrs="{'invisible': [('tipo', '!=', '2')]}">CNPJ:</b>
+                  </label>
+                  <div>
+                    <field name="cpf"/>
+                  </div>
+                  <label for="" name="rg">
+                    <b attrs="{'invisible': [('tipo', '!=', '1')]}">RG:</b>
+                    <b attrs="{'invisible': [('tipo', '!=', '2')]}">IE:</b>
+                  </label>
+                  <div class="o_address_format">
+                    <field name="rg"/>
+                  </div>
+                  <field name="rg_orgao" attrs="{'invisible': [('tipo', '!=', '1')]}"/>
+                  <field name="rg_estado" attrs="{'invisible': [('tipo', '!=', '1')]}"/>
+                  <field name="rg_emissao" attrs="{'invisible': [('tipo', '!=', '1')]}"/>
+                </group>
+                <group col="4" colspan="12">
+                  <label for="" name="name">
+                    <b attrs="{'invisible': [('tipo', '!=', '1')]}">Nome</b>
+                    <b attrs="{'invisible': [('tipo', '!=', '2')]}">Razão Social</b>
+                  </label>
+                  <div>
+                    <field name="name"/>
+                  </div>
+                  <label for="" name="nickname">
+                    <b attrs="{'invisible': [('tipo', '!=', '1')]}">Apelido</b>
+                    <b attrs="{'invisible': [('tipo', '!=', '2')]}">Fantasia</b>
+                  </label>
+                  <div>
+                    <field name="nickname"/>
+                  </div>
+                </group>
+                <notebook position="inside">
+                  <page string="Informações Pessoais">
+                    <group col="4">
+                      <field name="street"/>
+                      <field name="numero"/>
+                      <field name="complemento"/>
+                      <field name="bairro"/>
+                      <field name="city"/>
+                      <field name="cod_mun_ibge"/>
+                      <field name="state_id"/>
+                      <field name="zip"/>
+                      <field name="country_id"/>
+                    </group>
+                    <group>
+                      <group>
+                        <label for="" name="telefone1">
+                          <b attrs="{'invisible': [('tipo', '!=', '1')]}">Residencial</b>
+                          <b attrs="{'invisible': [('tipo', '!=', '2')]}">Telefone1</b>
+                        </label>
+                        <div class="o_address_format">
+                          <field name="telefone1"/>
+                          <field name="tipooperadora1"/>
+                          <field name="tipotel1"/>
+                        </div>
+                      </group>
+                      <group>
+                        <field name="site"/>
+                        <field name="email"/>
+                      </group>
+                    </group>
+
+                  </page>
+                  <page string="Informações Financeiras">
+                  </page>
+                  <page string="Observações">
+                  </page>
+                  <page string="Responsáveis">
+                  </page>
+                  <page string="Contatos / Autorizados">
+                  </page>
+                  <page string="Informações Fiscais">
+                  </page>
+                </notebook>
+              </page>
+              <page string="Histórico de Movimento (Compras e Financeiro)">
+              </page>
+            </notebook>
+          </sheet>
+        </xpath>
+      </field>
+    </record>
+
+    <!-- actions opening views on models -->
+
+    <record model="ir.actions.act_window" id="clientes.action_window">
+      <field name="name">Clientes</field>
+      <field name="res_model">res.partner</field>
+      <field name="view_mode">tree,form,graph</field>
+    </record>
+
+
+    <!-- Top menu item -->
+    <menuitem name="Clientes" id="clientes.menu_root"/>
+
+    <!-- menu categories -->
+    <menuitem name="Clientes" id="clientes.menu_1" parent="clientes.menu_root"/>
+
+    <!-- actions -->
+    <menuitem name="Listar" id="clientes.menu_1_list" parent="clientes.menu_1" action="clientes.action_window"/>
+
+  </data>
+</odoo>
