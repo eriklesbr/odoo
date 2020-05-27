@@ -1,0 +1,44 @@
+<odoo>
+    <data>
+
+        <!-- explicit list view definition -->
+        <record model="ir.ui.view" id="region_tree_view">
+            <field name="name">region.tree</field>
+            <field name="model">res.region</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="nome"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Formulario -->
+        <record model="ir.ui.view" id="region_form_view">
+            <field name="name">region.form</field>
+            <field name="model">res.region</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="nome" style="width: 100%;"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="region_list_action">
+            <field name="name">Regiões</field>
+            <field name="res_model">res.region</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <!-- menu categories -->
+        <menuitem name="Regiões" id="clientes.menu_2" parent="clientes.menu_root"/>
+
+        <!-- actions -->
+        <menuitem name="Listar" id="clientes.menu_2_list" parent="clientes.menu_2" action="region_list_action"/>
+
+    </data>
+</odoo>

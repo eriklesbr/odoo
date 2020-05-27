@@ -1,0 +1,3 @@
+id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
+access_res_contact,res.contact,model_res_contact,,1,1,1,1
+access_res_region,res.region,model_res_region,,1,1,1,1

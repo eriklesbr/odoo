@@ -1,0 +1,251 @@
+<odoo>
+  <data>
+
+    <!-- explicit list view definition -->
+    <record model="ir.ui.view" id="clientes_tree_view">
+      <field name="name">clientes.tree</field>
+      <field name="model">res.partner</field>
+      <field name="inherit_id" ref="base.view_partner_tree"/>
+      <field name="arch" type="xml">
+        <xpath expr="//tree" position="replace">
+          <tree>
+            <field name="name"/>
+            <field name="cpf"/>
+            <field name="rg"/>
+          </tree>
+        </xpath>
+      </field>
+    </record>
+
+    <!-- Formulario -->
+    <record model="ir.ui.view" id="partner_form_view">
+      <field name="name">clientes.form</field>
+      <field name="model">res.partner</field>
+      <field name="inherit_id" ref="base.view_partner_form"/>
+      <field name="arch" type="xml">
+
+        <xpath expr="//sheet" position="replace">
+          <sheet>
+            <notebook>
+              <page string="Informações Cadastrais">
+                <group col="12">
+                  <field name="tipo_pessoa" style="height:25px"/>
+                  <label for="" name="cpf">
+                    <b attrs="{'invisible': [('tipo_pessoa', '!=', '1')]}">CPF:</b>
+                    <b attrs="{'invisible': [('tipo_pessoa', '!=', '2')]}">CNPJ:</b>
+                  </label>
+                  <div>
+                    <field name="cpf" colspan="1"/>
+                  </div>
+                  <label for="" name="rg">
+                    <b attrs="{'invisible': [('tipo_pessoa', '!=', '1')]}">RG:</b>
+                    <b attrs="{'invisible': [('tipo_pessoa', '!=', '2')]}">IE:</b>
+                  </label>
+                  <div class="o_address_format">
+                    <field name="rg"/>
+                  </div>
+                  <field name="rg_orgao" attrs="{'invisible': [('tipo_pessoa', '!=', '1')]}" style="height:25px"/>
+                  <field name="rg_estado" attrs="{'invisible': [('tipo_pessoa', '!=', '1')]}" style="height:25px"/>
+                  <field name="rg_emissao" attrs="{'invisible': [('tipo_pessoa', '!=', '1')]}"/>
+                </group>
+                <group col="4" colspan="12">
+                  <label for="" name="name">
+                    <b attrs="{'invisible': [('tipo_pessoa', '!=', '1')]}">Nome</b>
+                    <b attrs="{'invisible': [('tipo_pessoa', '!=', '2')]}">Razão Social</b>
+                  </label>
+                  <div>
+                    <field name="name"/>
+                  </div>
+                  <label for="" name="apelido">
+                    <b attrs="{'invisible': [('tipo_pessoa', '!=', '1')]}">Apelido</b>
+                    <b attrs="{'invisible': [('tipo_pessoa', '!=', '2')]}">Fantasia</b>
+                  </label>
+                  <div>
+                    <field name="apelido"/>
+                  </div>
+                </group>
+                <notebook position="inside">
+                  <page string="Informações Pessoais">
+                    <group col="12">
+                      <field name="street" colspan="4"/>
+                      <field name="numero" colspan="4"/>
+                      <field name="street2" colspan="4"/>
+                      <field name="bairro" colspan="4"/>
+                      <field name="city" colspan="4"/>
+                      <field name="cod_mun_ibge" colspan="4"/>
+                      <field name="state_id" colspan="4"/>
+                      <field name="zip" colspan="4"/>
+                      <field name="country_id" colspan="4"/>
+                    </group>
+                    <group col="12">
+                      <group colspan="6" col="12" string="Telefones">
+                        <label for="" name="telefone1" colspan="2">
+                          <b attrs="{'invisible': [('tipo_pessoa', '!=', '1')]}">Residencial</b>
+                          <b attrs="{'invisible': [('tipo_pessoa', '!=', '2')]}">Telefone1</b>
+                        </label>
+                        <group colspan="8" col="3" class="mt-0 mb-0">
+                          <field name="telefone1" nolabel="1"/>
+                          <field name="tipooperadora1" nolabel="1" style="height: 25px"/>
+                          <field name="tipotel1" nolabel="1" style="height: 25px"/>
+                        </group>
+                        <newline/>
+                        <label for="" name="telefone2" colspan="2">
+                          <b attrs="{'invisible': [('tipo_pessoa', '!=', '1')]}">Comercial</b>
+                          <b attrs="{'invisible': [('tipo_pessoa', '!=', '2')]}">Telefone2</b>
+                        </label>
+                        <group colspan="8" col="3" class="mt-0 mb-0">
+                          <field name="telefone2" nolabel="1"/>
+                          <field name="tipooperadora2" nolabel="1" style="height: 25px"/>
+                          <field name="tipotel2" nolabel="1" style="height: 25px"/>
+                        </group>
+                        <newline/>
+                        <label for="" name="telefone3" colspan="2">
+                          <b>Telefone3</b>
+                        </label>
+                        <group colspan="8" col="3" class="mt-0 mb-0">
+                          <field name="telefone3" nolabel="1"/>
+                          <field name="tipooperadora3" nolabel="1" style="height: 25px"/>
+                          <field name="tipotel3" nolabel="1" style="height: 25px"/>
+                        </group>
+                        <newline/>
+                        <label for="" name="celular" colspan="2">
+                          <b>Celular</b>
+                        </label>
+                        <group colspan="8" col="3" class="mt-0 mb-0">
+                          <field name="celular" nolabel="1"/>
+                          <field name="tipooperadora4" nolabel="1" style="height: 25px"/>
+                          <field name="tipotel4" nolabel="1" style="height: 25px"/>
+                        </group>
+                      </group>
+                      <group colspan="6">
+                        <field name="site"/>
+                        <field name="email"/>
+                        <field name="regiao_id"/>
+                        <field name="vendedor_id"/>
+                      </group>
+                    </group>
+                    <group col="12" class="mb-0 select">
+                      <field name="nome_pai" colspan="5"/>
+                      <field name="nome_mae" colspan="5"/>
+                      <field name="estado_civil" colspan="5" style="height: 25px; width: 50%"/>
+                      <field name="conjuge" colspan="5"/>
+                    </group>
+                    <group class="mt-0">
+                      <group>
+                        <field name="sexo" class="w-25" colspan="3" style="height: 25px"/>
+                        <field name="nascimento" class="w-50" colspan="6"/>
+                        <field name="moradia" class="w-25" colspan="3"/>
+                        <label for="" name="ref1">
+                          <b>Referências</b>
+                        </label>
+                        <div>
+                          <field name="ref1"/>
+                          <field name="ref2"/>
+                          <field name="ref3"/>
+                        </div>
+                      </group>
+                      <group string="Informações Profissionais">
+                        <field name="profissao"/>
+                        <field name="empresa"/>
+                        <field name="aquisitivo_renda"/>
+                      </group>
+                    </group>
+                  </page>
+                  <page string="Informações Financeiras">
+                  </page>
+                  <page string="Observações">
+                    <group>
+                      <label for="obs1" string="Observações"/>
+                      <div class="o_address_format">
+                        <field name="obs1"/>
+                        <field name="obs2"/>
+                        <field name="obs3"/>
+                        <field name="obs4"/>
+                      </div>
+                    </group>
+                    <label for="historico" string="Histórico/Observações Internas"/>
+                    <div class="o_address_format">
+                      <field name="historico"/>
+                    </div>
+                  </page>
+                  <page string="Responsáveis">
+                    <notebook>
+                      <page string="1">
+                        <group col="12">
+                          <field name="res1_nome" colspan="6"/>
+                          <field name="res1_estado_civil" style="height: 25px" colspan="3"/>
+                          <field name="res1_profissao" colspan="3"/>
+                        </group>
+                        <group col="12">
+                          <field name="res1_endereco" colspan="4"/>
+                          <field name="res1_bairro" colspan="3"/>
+                          <field name="res1_cidade" colspan="3"/>
+                          <field name="res1_uf" colspan="2"/>
+                        </group>
+                        <group col="12">
+                          <field name="res1_cep" colspan="4"/>
+                          <field name="res1_rg" colspan="4"/>
+                          <field name="res1_cpf" colspan="4"/>
+                        </group>
+                      </page>
+                      <page string="2">
+                        <group col="12">
+                          <field name="res2_nome" colspan="6"/>
+                          <field name="res2_estado_civil" style="height: 25px" colspan="3"/>
+                          <field name="res2_profissao" colspan="3"/>
+                        </group>
+                        <group col="12">
+                          <field name="res2_endereco" colspan="4"/>
+                          <field name="res2_bairro" colspan="3"/>
+                          <field name="res2_cidade" colspan="3"/>
+                          <field name="res2_uf" colspan="2"/>
+                        </group>
+                        <group col="12">
+                          <field name="res2_cep" colspan="4"/>
+                          <field name="res2_rg" colspan="4"/>
+                          <field name="res2_cpf" colspan="4"/>
+                        </group>
+                      </page>
+                    </notebook>
+                  </page>
+                  <page string="Contatos / Autorizados">
+                    <field name="contato_id" nolabel="1"/>
+                  </page>
+                  <page string="Informações Fiscais">
+                    <group>
+                      <field name="crt" style="width: 30%; height: 25px"/>
+                      <field name="tipo_cliente" style="width: 30%; height: 25px"/>
+                      <field name="id_estrangeiro" style="width: 30%;"/>
+                      <field name="cnae" style="width: 20%;"/>
+                    </group>
+                  </page>
+                </notebook>
+              </page>
+              <page string="Histórico de Movimento (Compras e Financeiro)">
+              </page>
+            </notebook>
+          </sheet>
+        </xpath>
+      </field>
+    </record>
+
+    <!-- actions opening views on models -->
+
+    <record model="ir.actions.act_window" id="clientes.action_window">
+      <field name="name">Clientes</field>
+      <field name="res_model">res.partner</field>
+      <field name="view_mode">tree,form,graph</field>
+    </record>
+
+
+    <!-- Top menu item -->
+    <menuitem name="Clientes" id="clientes.menu_root"/>
+
+    <!-- menu categories -->
+    <menuitem name="Clientes" id="clientes.menu_1" parent="clientes.menu_root"/>
+
+    <!-- actions -->
+    <menuitem name="Listar" id="clientes.menu_1_list" parent="clientes.menu_1" action="clientes.action_window"/>
+
+  </data>
+</odoo>

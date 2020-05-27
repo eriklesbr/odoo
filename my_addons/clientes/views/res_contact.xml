@@ -1,0 +1,50 @@
+<odoo>
+    <data>
+
+        <!-- explicit list view definition -->
+        <record model="ir.ui.view" id="contatos_tree_view">
+            <field name="name">contatos.tree</field>
+            <field name="model">res.contact</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="nome"/>
+                    <field name="parentesco"/>
+                    <field name="email"/>
+                    <field name="celular"/>
+                    <field name="telefone1"/>
+                    <field name="telefone2"/>
+                    <field name="autorizado_comprar"/>
+                    <field name="observacao"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Formulario -->
+        <record model="ir.ui.view" id="contatos_form_view">
+            <field name="name">contatos.form</field>
+            <field name="model">res.contact</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <field name="nome" style="width: 100%;"/>
+                        <field name="parentesco" style="width: 50%; height: 25px"/>
+                        <field name="email" style="width: 100%;"/>
+                        <field name="celular" style="width: 30%;"/>
+                        <field name="telefone1" style="width: 30%;"/>
+                        <field name="telefone2" style="width: 30%;"/>
+                        <field name="autorizado_comprar" style="width: 30%;"/>
+                        <field name="observacao" style="width: 100%;"/>
+                        <field name="cliente_id" style="width: 50%;"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="contatos_list_action">
+            <field name="name">Contatos Autorizados</field>
+            <field name="res_model">res.contact</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+    </data>
+</odoo>
