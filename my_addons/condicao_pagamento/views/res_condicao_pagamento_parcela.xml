@@ -1,0 +1,44 @@
+<odoo>
+  <data>
+
+    <!-- explicit list view definition -->
+    <record model="ir.ui.view" id="condicao_pagamento_parcela_view">
+      <field name="name">Parcelas</field>
+      <field name="model">res.condicao_pagamento_parcela</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="numero"/>
+          <field name="qtde_dias"/>
+          <field name="percentual"/>
+        </tree>
+      </field>
+    </record>
+
+    <!-- explicit list view definition -->
+    <record model="ir.ui.view" id="condicao_pagamento_parcela_form">
+      <field name="name">Parcelas</field>
+      <field name="model">res.condicao_pagamento_parcela</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet>
+            <group col="3">
+              <field name="numero" attrs="{'readonly':[('id','!=',False)]}" colspan="1"/>
+              <field name="qtde_dias" colspan="1"/>
+              <field name="percentual" colspan="1"/>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+
+    <!-- actions opening views on models -->
+
+    <record model="ir.actions.act_window" id="condicao_pagamento_parcela_action_window">
+      <field name="name">Parcelas</field>
+      <field name="res_model">res.condicao_pagamento_parcela</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+  </data>
+</odoo>

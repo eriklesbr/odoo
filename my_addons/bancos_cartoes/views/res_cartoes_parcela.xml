@@ -1,0 +1,46 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+
+    <record model="ir.ui.view" id="cartao_parcela_tree">
+      <field name="name">Parcelas</field>
+      <field name="model">res.cartao_parcela</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="qtde_parcela"/>
+          <field name="comissao"/>
+          <field name="tipo_ressarcimento"/>
+          <field name="dias_ressarcimento"/>
+        </tree>
+      </field>
+    </record>
+
+    <!-- Form View Definition -->
+    <record model="ir.ui.view" id="cartao_parcela_form">
+      <field name="name">Parcelas</field>
+      <field name="model">res.cartao_parcela</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet>
+            <group col="4" colspan="1">
+              <field name="qtde_parcela" string="Número da parcela"/>
+              <field name="comissao"/>
+              <field name="tipo_ressarcimento" style="height: 25px"/>
+              <field name="dias_ressarcimento"/>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+
+    <!-- actions opening views on models -->
+
+    <record model="ir.actions.act_window" id="cartao_parcela_action">
+      <field name="name">Parcelas</field>
+      <field name="res_model">res.cartao_parcela</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+  </data>
+</odoo>

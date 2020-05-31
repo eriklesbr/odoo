@@ -1,0 +1,9 @@
+<odoo>
+  <data>
+    <template id="assets_backend" name="br_base_assets" inherit_id="web.assets_backend">
+      <link rel="stylesheet" type="text/scss" href="/web/static/src/scss/list_view.scss" position="after">
+        <link rel="stylesheet" type="text/scss" href="/bancos_cartoes/static/src/scss/base_view.scss"/>
+      </link>
+    </template>
+  </data>
+</odoo>

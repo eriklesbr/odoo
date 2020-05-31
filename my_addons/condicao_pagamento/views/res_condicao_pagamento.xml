@@ -1,0 +1,68 @@
+<odoo>
+  <data>
+
+    <!-- explicit list view definition -->
+    <record model="ir.ui.view" id="condicao_pagamento.list">
+      <field name="name">Condições de pagamento</field>
+      <field name="model">res.condicao_pagamento</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="descricao"/>
+          <field name="ativo"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="condicao_pagamento.form">
+      <field name="name">Condições de pagamento</field>
+      <field name="model">res.condicao_pagamento</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet>
+            <group>
+              <field name="ativo"/>
+              <field name="descricao" placeholder="Ex: 2X (Entrada + 1)"/>
+              <field name="acrescimo" class="w-20"/>
+            </group>
+            <group string="Entrada" col="12">
+              <field name="entrada_rec" colspan="4"/>
+              <field name="entrada_min" colspan="4"/>
+            </group>
+            <group string="Parcelamento" col="12">
+              <field name="qtde_parcelas" colspan="4"/>
+              <field name="int_dias" colspan="4"/>
+            </group>
+
+            <button name="gerar_parcelas" string="Gerar Parcelas" type="object" class="oe_highlight float-right mb-2 oe_edit_only" icon="fa-table">
+            </button>
+
+
+            <field name="parcelas_id"/>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+
+    <!-- actions opening views on models -->
+
+    <record model="ir.actions.act_window" id="condicao_pagamento.action_window">
+      <field name="name">Condições de Pagamento</field>
+      <field name="res_model">res.condicao_pagamento</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Top menu item -->
+
+    <menuitem name="Condições de Pagamento" id="condicao_pagamento.menu_root"/>
+
+    <!-- menu categories -->
+
+    <menuitem name="Condições de Pagamento" id="condicao_pagamento.menu_1" parent="condicao_pagamento.menu_root"/>
+
+    <!-- actions -->
+
+    <menuitem name="Listar" id="condicao_pagamento.menu_1_list" parent="condicao_pagamento.menu_1" action="condicao_pagamento.action_window"/>
+
+  </data>
+</odoo>

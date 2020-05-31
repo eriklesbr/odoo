@@ -8,8 +8,12 @@ from odoo.exceptions import UserError, ValidationError
 class ResPartner(models.Model):
     _inherit = ['res.partner']
 
-    tipo_pessoa = fields.Selection(string='Tipo Pessoa', selection=[
-                                   ('1', 'Física'), ('2', 'Jurídica')], default='1')
+    tipo_pessoa = fields.Selection(
+        string='Tipo Pessoa',
+        selection=[
+            ('1', 'Física'),
+            ('2', 'Jurídica')],
+        default='1')
     cpf = fields.Char(string='CPF', size=18, copy=False)
     rg = fields.Char(string='RG')
     rg_orgao = fields.Selection(string='ORG', selection=[('SSP', 'SSP')])
@@ -18,6 +22,7 @@ class ResPartner(models.Model):
     apelido = fields.Char(string="Apelido")
     numero = fields.Char(string="Número")
     bairro = fields.Char(string="Bairro")
+    cidade = fields.Many2one(comodel_name='res.city', string='Cidade')
     cod_mun_ibge = fields.Char(string="Cod. Mun. IBGE")
     telefone1 = fields.Char(string="Residencial")
     telefone2 = fields.Char(string="Comercial")
@@ -156,9 +161,10 @@ class ResPartner(models.Model):
             ('4', 'AMASIADO(A)'),
             ('5', 'DESQUITADO(A)')])
     conjuge = fields.Char(string='Cônjuge')
-    sexo = fields.Selection(string='Sexo', selection=[('M', 'M'), ('F', 'F'), ('I', 'I')])
+    sexo = fields.Selection(string='Sexo', selection=[
+                            ('M', 'M'), ('F', 'F'), ('I', 'I')])
     nascimento = fields.Date(string='Nascimento')
-    moradia = fields.Boolean(string='Moradia')
+    moradia = fields.Boolean(string='Casa própria')
     ref1 = fields.Char()
     ref2 = fields.Char()
     ref3 = fields.Char()
@@ -171,6 +177,24 @@ class ResPartner(models.Model):
             ('2', 'De 1 até 2 salários mínimos'),
             ('3', 'De 5 até 10 salários mínimos'),
             ('4', 'Acima de 10 salários mínimos')])
+    situacao = fields.Selection(
+        string='Situação',
+        selection=[
+            ('1', 'Aprovado'),
+            ('2', 'Em observação'),
+            ('3', 'Bloqueado'),
+            ('4', 'Inativo'),
+            ('5', 'Serasa/SPC')])
+    limite = fields.Float(string='Limite')
+    fin_dias_juros = fields.Integer(string='Dias de carência(juros)')
+    fin_dias_bloqueio = fields.Integer(string='Dias P/Bloqueio')
+    prev_pag_ini = fields.Integer(string="Previsão de pagamento (dias)")
+    prev_pag_fin = fields.Integer(string="a")
+    tipo_liberacao = fields.Selection(
+        string='Tipo de Liberação',
+        selection=[
+            ('T', 'Todas'),
+            ('R', 'Restritas às condições selecionadas')])
 
     @api.onchange('cpf')
     def _onchange_cpf(self):
@@ -189,3 +213,20 @@ class ResPartner(models.Model):
                     raise UserError('Verifique seu número de CPF!')
                 else:
                     raise UserError('Verifique seu número de CNPJ!')
+
+    @api.onchange('cidade')
+    def _onchange_cidade(self):
+        """ Ao alterar o campo cidade copia o dados como UF e código
+        do município no IBGE para os campos do formulário.
+        """
+        if self.cidade:
+            self.cod_mun_ibge = self.cidade.cod_ibge
+            res = {}
+            self.state_id = False
+            # procurar estado pelo nome para buscar id
+            state_id = self.env['res.country.state'].search(
+                [('name', '=', self.cidade.estado), ('code', '=', self.cidade.uf)])
+
+            if state_id:
+                # após localizado, setar id
+                self.state_id = state_id.ids[0]

@@ -1,0 +1,63 @@
+<odoo>
+    <data>
+        <!-- explicit list tree view definition -->
+        <record model="ir.ui.view" id="cidades_tree_view">
+            <field name="name">cidades.tree</field>
+            <field name="model">res.city</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="id"/>
+                    <field name="cidade"/>
+                    <field name="uf"/>
+                    <field name="cod_ibge"/>
+                    <field name="estado"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- search -->
+        <record model="ir.ui.view" id="cidades_search_view">
+            <field name="name">cidades.search</field>
+            <field name="model">res.city</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="id"/>
+                    <field name="cidade"/>
+                    <field name="cod_ibge"/>
+                </search>
+            </field>
+        </record>
+
+        <!-- Formulario -->
+        <record model="ir.ui.view" id="cidades_form_view">
+            <field name="name">cidades.form</field>
+            <field name="model">res.city</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="cidade"/>
+                            <field name="uf"/>
+                            <field name="cod_ibge"/>
+                            <field name="estado"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="cidades_list_action">
+            <field name="name">Cidades</field>
+            <field name="res_model">res.city</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <!-- menu categories -->
+        <menuitem name="Cidades" id="clientes.menu_3" parent="clientes.menu_root"/>
+
+        <!-- actions -->
+        <menuitem name="Listar" id="clientes.menu_3_list" parent="clientes.menu_3" action="cidades_list_action"/>
+
+    </data>
+</odoo>

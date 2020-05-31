@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "Clientes",
+    'name': "Bancos/Cartões/Financeiras",
 
     'summary': """
-        CRUD Clientes""",
+        CRUD Bancos/Cartões/Financeiras""",
 
     'description': """
-        Módulo para gerenciar clientes:
+        Módulo para gerenciar Bancos/Cartões/Financeiras:
             Cadastrar.
             Listar.
             Editar.
@@ -28,11 +28,9 @@
     # always loaded
     'data': [
         'security/ir.model.access.csv',
-        'views/res_contact.xml',
-        'views/res_partner.xml',
-        'views/res_region.xml',
+        'views/res_bancos.xml',
+        'views/res_cartoes_parcela.xml',
         'views/templates.xml',
-        'views/res_city.xml',
     ],
     'demo': False,
     'application': True,

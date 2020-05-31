@@ -1,0 +1,46 @@
+<odoo>
+  <data>
+
+    <!-- explicit list view definition -->
+    <record model="ir.ui.view" id="tipo_pagamento_view">
+      <field name="name">Tipo de Pagamento</field>
+      <field name="model">res.tipo_pagamento</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="forma"/>
+          <field name="ordem" class="o_list_char"/>
+        </tree>
+      </field>
+    </record>
+
+    <!-- explicit form definition -->
+    <record model="ir.ui.view" id="tipo_pagamento_form">
+      <field name="name">Tipo de Pagamento</field>
+      <field name="model">res.tipo_pagamento</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet>
+            <group col="2">
+              <field name="forma" colspan="1"/>
+              <field name="ordem" colspan="1"/>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+
+    <!-- actions opening views on models -->
+
+    <record model="ir.actions.act_window" id="tipo_pagamento_action_window">
+      <field name="name">Tipo de Pagamento</field>
+      <field name="res_model">res.tipo_pagamento</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Tipo de Pagamento" id="condicao_pagamento.menu_2" parent="condicao_pagamento.menu_root"/>
+
+    <menuitem name="Listar" id="condicao_pagamento.menu_2_list" parent="condicao_pagamento.menu_2" action="tipo_pagamento_action_window"/>
+
+  </data>
+</odoo>

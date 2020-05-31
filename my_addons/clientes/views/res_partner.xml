@@ -12,6 +12,7 @@
             <field name="name"/>
             <field name="cpf"/>
             <field name="rg"/>
+            <field name="situacao"/>
           </tree>
         </xpath>
       </field>
@@ -71,7 +72,7 @@
                       <field name="numero" colspan="4"/>
                       <field name="street2" colspan="4"/>
                       <field name="bairro" colspan="4"/>
-                      <field name="city" colspan="4"/>
+                      <field name="cidade" colspan="4"/>
                       <field name="cod_mun_ibge" colspan="4"/>
                       <field name="state_id" colspan="4"/>
                       <field name="zip" colspan="4"/>
@@ -124,7 +125,7 @@
                         <field name="vendedor_id"/>
                       </group>
                     </group>
-                    <group col="12" class="mb-0 select">
+                    <group col="12" class="mb-0 select" attrs="{'invisible': [('tipo_pessoa', '!=', '1')]}">
                       <field name="nome_pai" colspan="5"/>
                       <field name="nome_mae" colspan="5"/>
                       <field name="estado_civil" colspan="5" style="height: 25px; width: 50%"/>
@@ -133,7 +134,13 @@
                     <group class="mt-0">
                       <group>
                         <field name="sexo" class="w-25" colspan="3" style="height: 25px"/>
-                        <field name="nascimento" class="w-50" colspan="6"/>
+                        <label for="" name="nascimento">
+                          <b attrs="{'invisible': [('tipo_pessoa', '!=', '1')]}">Nascimento</b>
+                          <b attrs="{'invisible': [('tipo_pessoa', '!=', '2')]}">Fundação</b>
+                        </label>
+                        <div>
+                          <field name="nascimento" class="w-50" colspan="6" nolabel="1"/>
+                        </div>
                         <field name="moradia" class="w-25" colspan="3"/>
                         <label for="" name="ref1">
                           <b>Referências</b>
@@ -145,13 +152,39 @@
                         </div>
                       </group>
                       <group string="Informações Profissionais">
-                        <field name="profissao"/>
-                        <field name="empresa"/>
-                        <field name="aquisitivo_renda"/>
+                        <label for="" name="profissao">
+                          <b attrs="{'invisible': [('tipo_pessoa', '!=', '1')]}">Profissão</b>
+                          <b attrs="{'invisible': [('tipo_pessoa', '!=', '2')]}">Ramo</b>
+                        </label>
+                        <div>
+                          <field name="profissao" nolabel="1"/>
+                        </div>
+                        <label for="" name="profissao">
+                          <b attrs="{'invisible': [('tipo_pessoa', '!=', '1')]}">Empresa</b>
+                          <b attrs="{'invisible': [('tipo_pessoa', '!=', '2')]}">Titular</b>
+                        </label>
+                        <div>
+                          <field name="empresa" nolabel="1"/>
+                        </div>
+                        <field name="aquisitivo_renda" attrs="{'invisible': [('tipo_pessoa', '!=', '1')]}"/>
                       </group>
                     </group>
                   </page>
                   <page string="Informações Financeiras">
+                    <group style="width: 60%">
+                      <group colspan="12">
+                        <field name="situacao"/>
+                      </group>
+                      <group colspan="12" col="12">
+                        <field name="limite" colspan="6"/>
+                        <field name="fin_dias_juros" colspan="6"/>
+                      </group>
+                      <group colspan="12" col="12">
+                        <field name="fin_dias_bloqueio" colspan="6"/>                    
+                        <field name="prev_pag_ini" colspan="3"/>                        
+                        <field name="prev_pag_fin" colspan="3"/>
+                      </group>
+                    </group>
                   </page>
                   <page string="Observações">
                     <group>

@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_res_condicao_pagamento,res.condicao_pagamento,model_res_condicao_pagamento,base.group_user,1,1,1,1
+access_res_condicao_pagamento_parcela,res.condicao_pagamento_parcela,model_res_condicao_pagamento_parcela,base.group_user,1,1,1,1
+access_res_tipo_pagamento,res.tipo_pagamento,model_res_tipo_pagamento,base.group_user,1,1,1,1

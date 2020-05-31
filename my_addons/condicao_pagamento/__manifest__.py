@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "Clientes",
+    'name': "Condições de Pagamento",
 
     'summary': """
-        CRUD Clientes""",
+        Gerenciar Condições de Pagamento e Parcelas""",
 
     'description': """
-        Módulo para gerenciar clientes:
+        Módulo para Gerenciar as Condições de Pagamento e Parcelas:
             Cadastrar.
             Listar.
             Editar.
@@ -28,11 +28,14 @@
     # always loaded
     'data': [
         'security/ir.model.access.csv',
-        'views/res_contact.xml',
-        'views/res_partner.xml',
-        'views/res_region.xml',
+        'views/res_condicao_pagamento_parcela.xml',
+        'views/res_condicao_pagamento.xml',
+        'views/res_tipo_pagamento.xml',
         'views/templates.xml',
-        'views/res_city.xml',
+    ],
+    # only loaded in demonstration mode
+    'demo': [
+        # 'demo/demo.xml',
     ],
     'demo': False,
     'application': True,
